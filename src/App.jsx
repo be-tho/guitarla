@@ -8,6 +8,8 @@ function App() {
 
     const [data, setData] = useState(db);
 
+    const [cart, setCart] = useState([]);
+
   return (
     <>
         <Header />
@@ -20,6 +22,7 @@ function App() {
                     <Guitar 
                         key = {guitar.id}
                         guitar = {guitar}
+                        setCart = {setCart}
                      />
                 ))}
             </div>
