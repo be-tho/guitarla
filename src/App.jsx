@@ -24,10 +24,37 @@ function App() {
         }
     }
 
+    function removeToCart(id) {
+        setCart(prevCart => prevCart.filter(guitar => guitar.id !== id));
+    }
+
+    function incrementQuantity(id) {
+        const updatedCart = cart.map((guitar) => {
+            if (guitar.id === id) {
+                guitar.quantity ++;
+            }
+            return guitar;
+        });
+        setCart(updatedCart);
+    }
+
+    function decrementQuantity(id) {
+        const updatedCart = cart.map((guitar) => {
+            if (guitar.id === id && guitar.quantity > 1) {
+                guitar.quantity --;
+            }
+            return guitar;
+        });
+        setCart(updatedCart);
+    }
+
   return (
     <>
         <Header 
             cart = {cart}
+            removeToCart = {removeToCart}
+            incrementQuantity = {incrementQuantity}
+            decrementQuantity = {decrementQuantity}
         />
     
         <main className="container-xl mt-5">
