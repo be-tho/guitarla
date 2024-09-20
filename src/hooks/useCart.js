@@ -1,5 +1,7 @@
 import { useState, useEffect } from 'react';
 import { db } from '../data/db';
+import { useMemo } from 'react';
+
 export const useCart = () => {
 
     const initialCart = () => {
@@ -63,6 +65,13 @@ export const useCart = () => {
         setCart([]);
     }
 
+     //state derivado
+     const isEmpty = useMemo(() => cart.length === 0 ,[cart]);
+
+     //total a pagar
+     const cartTotal = useMemo(() => cart.reduce((total, item) => total + (item.quantity * item.price), 0), [cart])
+ 
+
     return {
         data,
         cart,
@@ -71,6 +80,8 @@ export const useCart = () => {
         removeToCart,
         incrementQuantity,
         decrementQuantity,
-        clearCart
+        clearCart,
+        isEmpty,
+        cartTotal
     }
 }
