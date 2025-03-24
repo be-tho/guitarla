@@ -14,9 +14,14 @@ export type CartState = {
     cart : CartItem[]
 }
 
+const initialCart = () : CartItem[] => {
+    const localStorageCart = localStorage.getItem('cart')
+    return localStorageCart ? JSON.parse(localStorageCart) : []
+}
+
 export const inialState : CartState = {
     data: db,
-    cart: []
+    cart: initialCart()
 }
 
 const MIN_ITEMS = 1
